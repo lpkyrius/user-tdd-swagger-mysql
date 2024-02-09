@@ -27,9 +27,10 @@ if (!e2eTestEnabled) {
 
         describe('Test POST /user/add', () => {
             test('It should respond with 200 success + Content-Type = json.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'success.test.tech@email.com',
-                    password: 'success.test.tech@123',
+                    email: `success.test.tech.${ randomString }@email.com`,
+                    password: `success.test.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -39,13 +40,14 @@ if (!e2eTestEnabled) {
                     .expect(201);
 
                   expect(response.body).toHaveProperty('id');
-                  expect(response.body.email).toBe('success.test.tech@email.com');
+                  expect(response.body.email).toBe(userData.email);
               });
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted email.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'test.techemail.com',
-                    password: 'test.tech@123',
+                    email: `fail.test.tech.${ randomString }email.com`,
+                    password: `fail.test.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -58,8 +60,9 @@ if (!e2eTestEnabled) {
             })
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted password.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'test.tech@email.com',
+                    email: `fail.test.tech.${ randomString }@email.com`,
                     password: '',
                     role: '2'
                 };
@@ -74,8 +77,9 @@ if (!e2eTestEnabled) {
 
             test('It should respond with 400 bad request + Content-Type = json for a password larger than 100.', async () => {
                 const repeatString: string = 'x'
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'test.tech@email.com',
+                    email: `fail.test.tech.${ randomString }@email.com`,
                     password: repeatString.repeat(101),
                     role: '2'
                 };
@@ -89,9 +93,10 @@ if (!e2eTestEnabled) {
             })
 
             test('It should respond with 400 bad request + Content-Type = json for an existent email.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'existent@email.com',
-                    password: 'existent@123',
+                    email: `existent.email.tech.${ randomString }@email.com`,
+                    password: `existent.email.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -100,7 +105,7 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(201);
 
-                expect(response.body.email).toBe('existent@email.com');
+                expect(response.body.email).toBe(userData.email);
 
                 const responseError = await request(app)
                     .post('/user/add')
@@ -112,9 +117,10 @@ if (!e2eTestEnabled) {
             })
 
             test('It should respond with 400 bad request + Content-Type = json for bad formatted role (!1 or !2).', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'bad.role@email.com',
-                    password: 'bad.role@123',
+                    email: `bad.role.tech.${ randomString }@email.com`,
+                    password: `bad.role.tech.${ randomString }@123`,
                     role: '3'
                 };
                 const response = await request(app)
@@ -186,9 +192,10 @@ if (!e2eTestEnabled) {
 
         describe('Test GET /user/find/:id', () => {
             test('It should respond with 200 success + Content-Type = json containing a User like object.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'to.find.test.tech@email.com',
-                    password: 'to.find.test.tech@123',
+                    email: `user.to.find.tech.${ randomString }@email.com`,
+                    password: `user.to.find.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -218,9 +225,10 @@ if (!e2eTestEnabled) {
 
         describe('Test GET /user/update/:id', () => {
             test('It should respond with 200 success + Content-Type = json with the updated user.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'to.update.test.tech@email.com',
-                    password: 'to.update.test.tech@123',
+                    email: `to.update.tech.${ randomString }@email.com`,
+                    password: `to.update.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -230,7 +238,7 @@ if (!e2eTestEnabled) {
                     .expect(201);
         
                 const userToUpdate: User = response.body;
-                userToUpdate.email = 'updated.test.tech@email.com';
+                userToUpdate.email = `updated.tech.${ randomString }@email.com`;
                 
                 const responseUpdate = await request(app)
                     .put('/user/update/'+ userToUpdate.id)
@@ -238,13 +246,14 @@ if (!e2eTestEnabled) {
                     .expect('Content-Type', /json/)
                     .expect(200);
         
-                    expect(responseUpdate.body.email).toEqual('updated.test.tech@email.com');
+                    expect(responseUpdate.body.email).toEqual(userToUpdate.email);
               });
             
             test('It should respond with 400 bad request when trying to update with a bad email format.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'to.not.update.test.tech@email.com',
-                    password: 'to.not.update.test.tech@123',
+                    email: `fail.to.update.tech.${ randomString }@email.com`,
+                    password: `fail.to.update.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -254,7 +263,7 @@ if (!e2eTestEnabled) {
                     .expect(201);
         
                 const userToUpdate: User = response.body;
-                userToUpdate.email = 'should.not.update.test.techemail.com';
+                userToUpdate.email = `should.not.update.tech.${ randomString }email.com`;
                 
                 const responseUpdate = await request(app)
                     .put('/user/update/'+ userToUpdate.id)
@@ -266,9 +275,10 @@ if (!e2eTestEnabled) {
               });
             
             test('It should respond with 400 bad request when trying to update with an email larger than 100 characters.', async () => {
+                const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData: User = {
-                    email: 'to.not.update.large.test.tech@email.com',
-                    password: 'to.not.update.large.test.tech@123',
+                    email: `fail.to.update.tech.${ randomString }@email.com`,
+                    password: `fail.to.update.tech.${ randomString }@123`,
                     role: '2'
                 };
                 const response = await request(app)
@@ -280,7 +290,7 @@ if (!e2eTestEnabled) {
                 const userToUpdate: User = response.body;
                 let stringToRepeat: string = 'x'
                 stringToRepeat = stringToRepeat.repeat(90)
-                userToUpdate.email = `should.not.update.large.test.tech${ stringToRepeat }@email.com`;
+                userToUpdate.email = `should.not.update.large.test.tech${ stringToRepeat }.${ randomString }@email.com`;
                 const responseUpdate = await request(app)
                     .put('/user/update/'+ userToUpdate.id)
                     .send(userToUpdate)

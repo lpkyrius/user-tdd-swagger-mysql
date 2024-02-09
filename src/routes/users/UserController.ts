@@ -118,8 +118,6 @@ class UserController {
 
   checkRole(role: any) {
     try {
-      // Matches any alphanumeric character or the specified symbols. 
-      // Size between 3 to 100
       if (!role)
           return false;
       if(!Object.values(UserRole).includes(role)) 

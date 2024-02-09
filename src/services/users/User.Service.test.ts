@@ -33,9 +33,10 @@ describe('#UserService', () =>{
 
     describe('#UserEmailExist', () => {
         it('should return true when check if an existent user email exists', async () => {
+            const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
             const user: User = {
-                email: 'exist.tech@email.com',
-                password: 'exist.tech@123',
+                email: `exist.tech.${ randomString }@email.com`,
+                password: `exist.tech.${ randomString }@123`,
                 role: '2'
             };
             const addedUser = await userService.add(user);
@@ -53,17 +54,19 @@ describe('#UserService', () =>{
 
     describe('#CreateUser', () => {
         it('should be able to create a new user and confirm it exists', async () => {
+            const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
             const user: User = {
-                email: 'peter.tech@email.com',
-                password: 'peter.tech@123',
+                email: `peter.tech.${ randomString }@email.com`,
+                password: `peter.tech.${ randomString }@123`,
                 role: '2'
             };
+            
             const addedUser = await userService.add(user);
             const result = await userService.exist(addedUser.id!);
 
             expect(addedUser).toHaveProperty('id');
             expect(result).toBeTruthy();
-            expect(user.email).toEqual('peter.tech@email.com')
+            expect(addedUser.email).toEqual(user.email)
         })
     })
 
@@ -113,17 +116,18 @@ describe('#UserService', () =>{
         let user: User;
     
         it('should find an existent user', async () => {
+            const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
             let user: User, result: User; 
             const userData = {
-                email: 'manager.to.find@email.com',
-                password: 'manager.to.find@123',
+                email: `user.to.find.manager.${ randomString }@email.com`,
+                password: `user.to.find.manager.${ randomString }@123`,
                 role: '1',
             };
 
             user = await userService.add(userData);
             const userFound: User = await userService.findById(user.id!);
     
-          expect(userFound.email).toEqual('manager.to.find@email.com')
+          expect(userFound.email).toEqual(user.email)
         });
     
         it('should throw an error when trying to find a non-existing user on UserService', async () => {
@@ -135,21 +139,22 @@ describe('#UserService', () =>{
 
     describe('#UpdateUser', () => {
         it('should be able to update an existent user', async () => {
+            const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
             let user: User, result: User; 
             const userData = {
-                email: 'manager.to.update@email.com',
-                password: 'manager.to.update@123',
+                email: `user.to.update.manager.${ randomString }@email.com`,
+                password: `user.to.update.manager.${ randomString }@123`,
                 role: '1',
             };
 
             user = await userService.add(userData);
 
             let updatedUser: User = Object.assign({}, user);
-            updatedUser.email = 'manager.updated@email.com';
+            updatedUser.email = `user.updated.manager.${ randomString }@email.com`;
 
             result = await userService.update(updatedUser);
 
-            expect(result.email).toBe('manager.updated@email.com');
+            expect(result.email).toBe(updatedUser.email);
         })
 
         it('should throw an error when updating a non-existing user on UserService', async () => {
@@ -167,9 +172,10 @@ describe('#UserService', () =>{
 
     describe('#DeleteUser', () => {
         it('should be able to delete an existent user', async () => {
+            const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
             const userData = {
-                email: 'manager.to.create@email.com',
-                password: 'manager.to.create@123',
+                email: `user.to.delete.manager.${ randomString }@email.com`,
+                password: `user.to.delete.manager.${ randomString }@123`,
                 role: '1',
             };
         
