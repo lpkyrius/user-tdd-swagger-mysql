@@ -109,8 +109,8 @@ class TaskController {
   checkSummary(summary: string) {
     try {
       // Matches any alphanumeric character or the specified symbols. 
-      // Size between 3 to 100
-      const PWD_REGEX = /^.{3,100}$/;
+      // Size between 3 to 500
+      const PWD_REGEX = /^.{3,500}$/;
       if (!summary)
           return false;
       if(PWD_REGEX.test(summary)) 

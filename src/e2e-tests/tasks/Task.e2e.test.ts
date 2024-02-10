@@ -155,7 +155,7 @@ if (!e2eTestEnabled) {
             expect(responseUpdate.body).toEqual(testTask);
       });
 
-      test('It should respond with 400 bad request when trying to update with a summary larger than 100 characters.', async () => {
+      test('It should respond with 400 bad request when trying to update with a summary larger than 500 characters.', async () => {
         const repeatedSummary = 'A';
         const response = await request(app)
               .get('/task/list')
@@ -164,7 +164,7 @@ if (!e2eTestEnabled) {
 
         const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
 
-        testTask.summary = repeatedSummary.repeat(101);
+        testTask.summary = repeatedSummary.repeat(501);
 
         const responseUpdate = await request(app)
 
