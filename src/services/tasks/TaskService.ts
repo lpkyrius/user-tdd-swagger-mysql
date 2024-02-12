@@ -1,5 +1,5 @@
 import { Task } from "../../entities/Task";
-import { ITaskRepository } from "../../repository/in-memory/ITaskRepository"
+import { ITaskRepository } from "../../repository/ITaskRepository"
 
 interface IAddTaskRequest {
   userId: string;

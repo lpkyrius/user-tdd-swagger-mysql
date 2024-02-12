@@ -1,5 +1,5 @@
 import { User } from '../../entities/User';
-import { IUserRepository } from '../../repository/in-memory/IUserRepository';
+import { IUserRepository } from '../../repository/IUserRepository';
 import { Cryptography } from '../Cryptography/Cryptography.Service';
 interface IAddUserRequest {
     email: string;

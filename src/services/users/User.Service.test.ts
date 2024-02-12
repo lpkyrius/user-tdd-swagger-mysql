@@ -1,6 +1,6 @@
 import { expect, describe, beforeAll } from '@jest/globals';
 import { User } from '../../entities/User';
-import { IUserRepository } from '../../repository/in-memory/IUserRepository';
+import { IUserRepository } from '../../repository/IUserRepository';
 import { UserService } from './User.Service';
 import { UserRepositoryInMemory } from '../../repository/in-memory/users/UserRepositoryInMemory';
 

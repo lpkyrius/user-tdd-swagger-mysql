@@ -2,8 +2,9 @@ import crypto from 'crypto';
 import * as fs from 'fs';
 import { Task } from "../../../entities/Task";
 import { ITaskRepository } from "../../ITaskRepository";
-import { ManageTaskTestFile } from "./ManageTaskTestFile";
-class TasksRepositoryInMemory implements ITaskRepository {
+import { ManageTaskTestFile } from '../../in-memory/tasks/ManageTaskTestFile';
+
+class TaskRepositoryInPostgres implements ITaskRepository {
 
   private readonly filePath: string;
 
@@ -71,4 +72,4 @@ class TasksRepositoryInMemory implements ITaskRepository {
   }
 }
 
-export { TasksRepositoryInMemory };
+export { TaskRepositoryInPostgres };

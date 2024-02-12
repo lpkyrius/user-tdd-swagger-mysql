@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import * as fs from 'fs';
 import { User } from '../../../entities/User';
-import { IUserRepository } from '../IUserRepository';
+import { IUserRepository } from '../../IUserRepository';
 import { ManageUserTestFile } from './ManageUserTestFile';
 
 class UserRepositoryInMemory implements IUserRepository {
