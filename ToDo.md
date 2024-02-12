@@ -36,3 +36,8 @@
 ##### Next phase
 
 - [ ] Integrate Users authentication (JWT) for Tasks management;
+
+
+Just for review:
+
+https://www.notion.so/ChatGPT-Functional-vs-OOP-code-base-organization-9a312c7ed68d4fdab350aa3413291fb7?pvs=4 

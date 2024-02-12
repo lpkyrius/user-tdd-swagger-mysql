@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/users/User.Service";
-import { UserRole } from "../../repository/in-memory/UserRole";
+import { UserRole } from "../../services/users/UserRole"
 
 const passwordMinSize = Number(process.env.PASSWORD_MIN_SIZE || 8);
 const passwordMaxSize = Number(process.env.PASSWORD_MAX_SIZE || 100);
