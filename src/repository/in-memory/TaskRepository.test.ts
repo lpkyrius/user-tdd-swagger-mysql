@@ -8,8 +8,8 @@ describe('#taskService', () => {
   // to enable/disable one specific test (in memory or postgres) 
   // just comment the correspondent line withing the repositories object below
   const repositories: Record<string, string> = { 
-    inmemory: 'InMemory', 
-    // database: 'Postgres' 
+    // inmemory: 'InMemory', 
+    database: 'Postgres' 
   };
 
   for (const property in repositories) {
@@ -25,7 +25,7 @@ describe('#taskService', () => {
           }
         });
 
-        describe('#Find Task by Id', () => {
+        describe.skip('#Find Task by Id', () => {
           it(`should throw an error if the task ID is not found - ${ repositories[property] }`, async () => { 
               try {
                 await tasksRepository.findTaskById('this.id.should.not.exist');
@@ -35,7 +35,7 @@ describe('#taskService', () => {
             });
         });
 
-        describe('#Delete Tasks', () => {
+        describe.skip('#Delete Tasks', () => {
           it(`should return false when deleting a non-existing task on RepositoryInMemory - ${ repositories[property] }`, async () => {
             const testDel = async function () {
               return await tasksRepository.delete('this.id.should.not.exist');

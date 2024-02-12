@@ -24,10 +24,10 @@
 2. Run `npm install`
 3. Run `nvm install 20` and `nvm use`. Now we're on the same page.
 4. Create and start the Postgres docker
-```docker run --name user-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres```
+```docker run --name user-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres```
 _Give it a minute to be sure the service is 100% up_
 5. Migrations (_to create the tables and populate - only for 1st time run_:
-_First, you need to run ```npm start``` at least once to create the database if it does not exist yet_
+_First, you need to run ```npm run start-nodemon``` at least once to create the database if it does not exist yet_
 5.1 Then run migrations and seeds:
 ```knex migrate:latest --knexfile ./db/knexfile.cjs --migrations-directory migrations```  
 5.2 - Seed (if you want a few records already there) _optional_:

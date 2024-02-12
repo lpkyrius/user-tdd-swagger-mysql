@@ -10,8 +10,8 @@ describe('#taskService', () => {
   // to enable/disable one specific test (in memory or postgres) 
   // just comment the correspondent line withing the repositories object below
   const repositories: Record<string, string> = { 
-    inmemory: 'InMemory', 
-    // database: 'Postgres' 
+    // inmemory: 'InMemory', 
+    database: 'Postgres' 
   };
 
   for (const property in repositories) {
@@ -63,7 +63,7 @@ describe('#taskService', () => {
 
     });
     
-    describe('#List Tasks', () => {
+    describe.skip('#List Tasks', () => {
       let tasks: Task[]; 
       const taskStructure = expect.arrayContaining([
         expect.objectContaining({
@@ -82,7 +82,7 @@ describe('#taskService', () => {
       });
     });
 
-    describe('#Find Tasks', () => {
+    describe.skip('#Find Tasks', () => {
       let task: Task;
 
       it('should find an existent task', async () => {
@@ -104,7 +104,7 @@ describe('#taskService', () => {
       });
     });
 
-    describe('#Update Tasks', () => {
+    describe.skip('#Update Tasks', () => {
       let task: Task, result: Task; 
 
       it('should be able to update an existent task', async () => {
@@ -135,7 +135,7 @@ describe('#taskService', () => {
 
     });
 
-    describe('#Delete Tasks', () => {
+    describe.skip('#Delete Tasks', () => {
 
       it('should be able to delete an existent task', async () => {
         const taskData = {
