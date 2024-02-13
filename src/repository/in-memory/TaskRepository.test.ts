@@ -8,8 +8,8 @@ describe('#taskService', () => {
   // to enable/disable one specific test (in memory or postgres) 
   // just comment the correspondent line withing the repositories object below
   const repositories: Record<string, string> = { 
-    inmemory: 'InMemory', 
-    // database: 'Postgres' 
+    // inmemory: 'InMemory', 
+    database: 'Postgres' 
   };
 
   for (const property in repositories) {

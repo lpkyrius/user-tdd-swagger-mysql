@@ -11,10 +11,6 @@ exports.up = function(knex) {
         table.enu('role', ['1', '2']).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
     })
-    // .alterTable('users', function(t) {
-    //     t.unique('id');
-    //     t.unique('email');
-    // })
 
     .createTable('maintenance_task', function (table) {
         table.string('id', 36).notNullable().unique();
@@ -23,9 +19,6 @@ exports.up = function(knex) {
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.foreign('user_id').references('id').inTable('users');
     })
-    // .alterTable('maintenance_task', function(t) {
-    //     t.unique('id')
-    // })
 };
 
 /**

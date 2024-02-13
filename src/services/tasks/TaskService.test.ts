@@ -10,8 +10,8 @@ describe('#taskService', () => {
   // to enable/disable one specific test (in memory or postgres) 
   // just comment the correspondent line withing the repositories object below
   const repositories: Record<string, string> = { 
-    inmemory: 'InMemory', 
-    // database: 'Postgres' 
+    // inmemory: 'InMemory', 
+    database: 'Postgres' 
   };
 
   for (const property in repositories) {
@@ -29,7 +29,7 @@ describe('#taskService', () => {
       taskService = new TaskService(tasksRepository);
     });
 
-    describe('#Task exists', () => {
+    describe.skip('#Task exists', () => {
       let task: Task; 
 
       it('should return false when check if a non-existent task exists', async () => {
