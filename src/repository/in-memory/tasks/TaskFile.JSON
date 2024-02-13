@@ -4,5 +4,29 @@
     "userId": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
     "summary": "Initial task summary #1 - from repository",
     "created_at": "2023-12-24T16:17:18.622Z"
+  },
+  {
+    "id": "23c35874-d81e-4fd6-a942-3d9cb04bc87e",
+    "userId": "943b7681-b1c3-4244-8a37-423ae7a3d7bc",
+    "summary": "Initial task summary #2 - from repository",
+    "created_at": "2024-01-30T11:32:34.690Z"
+  },
+  {
+    "userId": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
+    "summary": "Test summary created with unit test.",
+    "id": "2e65fdb3-3404-43b0-9964-2bf3b415da55",
+    "created_at": "2024-02-13T15:37:49.649Z"
+  },
+  {
+    "userId": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
+    "summary": "Test summary to be found",
+    "id": "ac1eb0fa-394e-4c2e-b3f9-e95e96535d16",
+    "created_at": "2024-02-13T15:37:49.660Z"
+  },
+  {
+    "userId": "533b7681-b1c3-4244-8a37-423ae7a3d8ac",
+    "summary": "Test summary already updated!!!",
+    "id": "7d7f1de0-62ae-45ee-b6cb-1c55996a4b3c",
+    "created_at": "2024-02-13T15:37:49.682Z"
   }
 ]

@@ -2,7 +2,6 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-
 exports.up = function(knex) {
     return knex.schema
     .createTable('users', function (table) {
@@ -12,14 +11,21 @@ exports.up = function(knex) {
         table.enu('role', ['1', '2']).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
     })
+    // .alterTable('users', function(t) {
+    //     t.unique('id');
+    //     t.unique('email');
+    // })
 
     .createTable('maintenance_task', function (table) {
         table.string('id', 36).notNullable().unique();
-        table.integer('user_id').unsigned().notNullable();
+        table.string('user_id', 36).unsigned().notNullable();
         table.string('summary', 500).notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.foreign('user_id').references('id').inTable('users');
     })
+    // .alterTable('maintenance_task', function(t) {
+    //     t.unique('id')
+    // })
 };
 
 /**
@@ -31,3 +37,5 @@ exports.down = function(knex) {
     .dropTable("maintenance_task")
     .dropTable("users");
 };
+
+exports.config = { transaction: false };
