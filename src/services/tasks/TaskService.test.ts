@@ -63,34 +63,34 @@ describe('#taskService', () => {
 
     });
     
-    // describe('#List Tasks', () => {
-    //   let tasks: Task[];
+    describe('#List Tasks', () => {
+      let tasks: Task[];
 
-    //   const taskStructureInMemory = expect.arrayContaining([
-    //     expect.objectContaining({
-    //       id: expect.any(String),
-    //       user_id: expect.any(String),
-    //       summary: expect.any(String),
-    //       created_at: expect.any(String),
-    //     }),
-    //   ]);
+      const taskStructureInMemory = expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(String),
+          user_id: expect.any(String),
+          summary: expect.any(String),
+          created_at: expect.any(String),
+        }),
+      ]);
 
-    //   const taskStructureInPostgres = expect.arrayContaining([
-    //     expect.objectContaining({
-    //       id: expect.any(String),
-    //       user_id: expect.any(String),
-    //       summary: expect.any(String),
-    //       created_at: expect.any(Date),
-    //     }),
-    //   ]);
-    //   if (repositories[property] == 'InMemory')
-    //   it('should receive an array of tasks', async () => {
-    //     tasks = await taskService.list();
-    //     console.log('debug', tasks)
-    //     expect(tasks).toBeInstanceOf(Array);
-    //     expect(tasks).toEqual(repositories[property] == 'InMemory' ? taskStructureInMemory : taskStructureInPostgres);
-    //   });
-    // });
+      const taskStructureInPostgres = expect.arrayContaining([
+        expect.objectContaining({
+          id: expect.any(String),
+          user_id: expect.any(String),
+          summary: expect.any(String),
+          created_at: expect.any(Date),
+        }),
+      ]);
+      if (repositories[property] == 'InMemory')
+      it('should receive an array of tasks', async () => {
+        tasks = await taskService.list();
+        console.log('debug', tasks)
+        expect(tasks).toBeInstanceOf(Array);
+        expect(tasks).toEqual(repositories[property] == 'InMemory' ? taskStructureInMemory : taskStructureInPostgres);
+      });
+    });
 
     // describe('#Find Tasks', () => {
     //   let task: Task;
