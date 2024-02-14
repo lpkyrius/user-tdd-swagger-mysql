@@ -36,16 +36,23 @@ class TaskRepositoryInPostgres implements ITaskRepository {
   }
 
   async update(task: Task): Promise<Task> {
-    // const tasks = this.readTasksFromFile();
-    // const index = tasks.findIndex((t) => t.id === task.id);
-    // if (index !== -1) {
-    //   tasks[index] = task;
-    //   this.writeTasksToFile(tasks);
-    //   return task;
-    // }
-    // throw new Error('task not found');
+    try {
+      const { summary } = task
+      const updatedUser = await db('maintenance_task')
+        .where('id', '=', task.id)
+        .update({
+            summary
+          })
+        .returning('*');
+      
+      if (!updatedUser.length)
+        throw new Error('task not found');
 
-    return task;
+      return updatedUser[0];
+  } catch (error) {
+      console.log(`Error in updateUser(): ${ error }`);
+      throw error;
+  }
   }
 
   async delete(id: string): Promise<boolean> {
@@ -104,14 +111,6 @@ class TaskRepositoryInPostgres implements ITaskRepository {
     }
   }
 
-  private readTasksFromFile(): Task[] {
-    const fileData = fs.readFileSync(this.filePath, 'utf-8');
-    return JSON.parse(fileData);
-  }
-
-  private writeTasksToFile(tasks: Task[]): void {
-    fs.writeFileSync(this.filePath, JSON.stringify(tasks, null, 2));
-  }
 }
 
 export { TaskRepositoryInPostgres };

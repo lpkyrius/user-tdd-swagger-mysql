@@ -114,7 +114,7 @@ describe('#taskService', () => {
       });
     });
 
-    describe.skip('#Update Tasks', () => {
+    describe('#Update Tasks', () => {
       let task: Task, result: Task; 
 
       it('should be able to update an existent task', async () => {
