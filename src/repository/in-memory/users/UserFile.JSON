@@ -14,17 +14,17 @@
     "created_at": "2024-01-30T11:32:34.690Z"
   },
   {
-    "email": "user.to.find.manager.161513@email.com",
-    "password": "$2a$10$4sTOYNzZh6vcx7TRT4RLHe5/ttKtPD5Fnf5ZvVXZx/RMW6VUrO2fK",
+    "email": "user.to.find.manager.166786@email.com",
+    "password": "$2a$10$L3aIMdhtnkT19GUDziHqzuRX05tIneObEU98G7FYfcXTuX9QsFE.2",
     "role": "1",
-    "id": "5cbd236e-2d70-4140-8bfd-2ffb962370b4",
-    "created_at": "2024-02-14T14:27:54.532Z"
+    "id": "7e033bf9-3f02-442b-803c-027887802ae0",
+    "created_at": "2024-02-14T19:20:10.839Z"
   },
   {
-    "email": "user.updated.manager.812487@email.com",
-    "password": "$2a$10$8MedFDPrTPJA8wHbB1B7SOxjnRl//.tjKipxYhwB8YOGTmbjhFz0q",
+    "email": "user.updated.manager.925743@email.com",
+    "password": "$2a$10$8EyJHtYaML.tDW5hZtORgOeghcnKyKkYRT.uc.K4TGrDRAgeerqCO",
     "role": "1",
-    "id": "e9068206-94b1-45e7-856a-0fb55f1caaa7",
-    "created_at": "2024-02-14T14:27:54.609Z"
+    "id": "fbd867dd-722b-413b-8cee-903d5d603310",
+    "created_at": "2024-02-14T19:20:10.910Z"
   }
 ]

@@ -1,19 +1,9 @@
 import crypto from 'crypto';
-import * as fs from 'fs';
-import { ManageTaskTestFile } from '../../in-memory/tasks/ManageTaskTestFile';
-
 import { Task } from "../../../entities/Task";
 import { ITaskRepository } from "../../ITaskRepository";
 import { db } from '../../../services/postgres/postgres';
 
 class TaskRepositoryInPostgres implements ITaskRepository {
-
-  private readonly filePath: string;
-  
-  constructor() {
-    const manageTaskTestFile = new ManageTaskTestFile();
-    this.filePath = manageTaskTestFile.getFile();
-  }
 
   async add(task: Task): Promise<Task> {
     try {
