@@ -5,6 +5,11 @@ import { TaskService } from './TaskService';
 import { TasksRepositoryInMemory } from '../../repository/in-memory/tasks/TaskRepositoryInMemory';
 import { TaskRepositoryInPostgres } from '../../repository/postgres/tasks/TaskRepositoryInPostgres';
 
+// Mock console.log and console.error globally for the entire test suite
+// So we keep a clear console when tests should return error 
+global.console.log = jest.fn();
+global.console.error = jest.fn();
+
 describe('#taskService', () => {
 
   // to enable/disable one specific test (in memory or postgres) 
@@ -145,7 +150,7 @@ describe('#taskService', () => {
 
     });
 
-    describe.skip('#Delete Tasks', () => {
+    describe('#Delete Tasks', () => {
 
       it('should be able to delete an existent task', async () => {
         const taskData = {

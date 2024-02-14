@@ -56,14 +56,21 @@ class TaskRepositoryInPostgres implements ITaskRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    // const tasks = this.readTasksFromFile();
-    // const initialLength = tasks.length;
-    // const filteredTasks = tasks.filter((t) => t.id !== id);
-    // if (filteredTasks.length !== initialLength) {
-    //   this.writeTasksToFile(filteredTasks);
-    //   return true;
-    // }
-    return false;
+    try {
+
+      const deletedTokenData = await db('maintenance_task')
+          .where({ id })
+          .del()
+          .returning("id");
+
+      if (!deletedTokenData.length)
+        return false;
+      
+      return true;
+    } catch (error) {
+        console.log(`Error in getCurrentUserRefreshToken(): ${ error }`);
+        throw error;
+    }
   }
 
   async exists(id: string): Promise<boolean> {
