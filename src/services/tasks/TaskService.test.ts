@@ -15,7 +15,7 @@ describe('#taskService', () => {
   };
 
   for (const property in repositories) {
-
+    
     let tasksRepository: ITaskRepository;
     let taskService: TaskService;
 
@@ -29,7 +29,7 @@ describe('#taskService', () => {
       taskService = new TaskService(tasksRepository);
     });
 
-    describe.skip('#Task exists', () => {
+    describe('#Task exists', () => {
       let task: Task; 
 
       it('should return false when check if a non-existent task exists', async () => {
@@ -63,46 +63,56 @@ describe('#taskService', () => {
 
     });
     
-    describe.skip('#List Tasks', () => {
-      let tasks: Task[]; 
-      const taskStructure = expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(String),
-          userId: expect.any(String),
-          summary: expect.any(String),
-          created_at: expect.any(String),
-        }),
-      ]);
+    // describe('#List Tasks', () => {
+    //   let tasks: Task[];
 
-      it('should receive an array of tasks', async () => {
-        tasks = await taskService.list();
+    //   const taskStructureInMemory = expect.arrayContaining([
+    //     expect.objectContaining({
+    //       id: expect.any(String),
+    //       user_id: expect.any(String),
+    //       summary: expect.any(String),
+    //       created_at: expect.any(String),
+    //     }),
+    //   ]);
 
-        expect(tasks).toBeInstanceOf(Array);
-        expect(tasks).toEqual(taskStructure);
-      });
-    });
+    //   const taskStructureInPostgres = expect.arrayContaining([
+    //     expect.objectContaining({
+    //       id: expect.any(String),
+    //       user_id: expect.any(String),
+    //       summary: expect.any(String),
+    //       created_at: expect.any(Date),
+    //     }),
+    //   ]);
+    //   if (repositories[property] == 'InMemory')
+    //   it('should receive an array of tasks', async () => {
+    //     tasks = await taskService.list();
+    //     console.log('debug', tasks)
+    //     expect(tasks).toBeInstanceOf(Array);
+    //     expect(tasks).toEqual(repositories[property] == 'InMemory' ? taskStructureInMemory : taskStructureInPostgres);
+    //   });
+    // });
 
-    describe.skip('#Find Tasks', () => {
-      let task: Task;
+    // describe('#Find Tasks', () => {
+    //   let task: Task;
 
-      it('should find an existent task', async () => {
-        const taskData = {
-          userId: '533b7681-b1c3-4244-8a37-423ae7a3d8ac',
-          summary: 'Test summary to be found',
-        };
+    //   it('should find an existent task', async () => {
+    //     const taskData = {
+    //       userId: '533b7681-b1c3-4244-8a37-423ae7a3d8ac',
+    //       summary: 'Test summary to be found',
+    //     };
 
-        task = await taskService.add(taskData);
-        const taskFound: Task = await taskService.findById(task.id!);
+    //     task = await taskService.add(taskData);
+    //     const taskFound: Task = await taskService.findById(task.id!);
 
-        expect(taskFound.summary).toEqual('Test summary to be found')
-      });
+    //     expect(taskFound.summary).toEqual('Test summary to be found')
+    //   });
 
-      it('should throw an error when trying to find a non-existing task on TaskService', async () => {
-        await expect(async () => {
-          const findTaskError: Task = await taskService.findById('this.id.should.not.exist');
-        }).rejects.toThrow('Id not found');
-      });
-    });
+    //   it('should throw an error when trying to find a non-existing task on TaskService', async () => {
+    //     await expect(async () => {
+    //       const findTaskError: Task = await taskService.findById('this.id.should.not.exist');
+    //     }).rejects.toThrow('Id not found');
+    //   });
+    // });
 
     describe.skip('#Update Tasks', () => {
       let task: Task, result: Task; 

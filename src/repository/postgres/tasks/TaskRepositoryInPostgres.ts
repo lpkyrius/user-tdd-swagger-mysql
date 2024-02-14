@@ -24,9 +24,10 @@ class TaskRepositoryInPostgres implements ITaskRepository {
             user_id: newTask.userId,
             summary: newTask.summary,
             created_at: newTask.created_at 
-          });
+          })
+          .returning('*');
           
-      return savedTask;  
+      return savedTask[0];  
             
     } catch (error) {
         console.log(`Error in addTask(): ${error}`);
@@ -59,24 +60,48 @@ class TaskRepositoryInPostgres implements ITaskRepository {
   }
 
   async exists(id: string): Promise<boolean> {
-    // const tasks = this.readTasksFromFile();
-    
-    // return tasks.some((task) => task.id === id);
+    try {
+      const recoveredData = await db('maintenance_task')
+          .select('*')
+          .from('maintenance_task')
+          .where({ id })
 
-    return false
+      if (!recoveredData.length)
+        return false;
+
+      return true;
+    } catch (error) {
+        console.log(`Error in exists(): ${ error }`)
+        throw error;
+    }
   }
 
   async list(): Promise<Task[]> {
-    return this.readTasksFromFile();
+    try {
+      const recoveredData = await db('maintenance_task')
+      .select('*').from('maintenance_task');
+      return recoveredData;
+  } catch (error) {
+      console.log(`Error in list(): ${ error }`)
+      throw error;
+  }
   }
 
   async findTaskById(id: string): Promise<Task> {
-    const tasks = this.readTasksFromFile();
-    const index = tasks.findIndex((t) => t.id === id);
-    if (index !== -1) {
-      return tasks[index];
+    try {
+      const recoveredData = await db('maintenance_task')
+          .select('*')
+          .from('maintenance_task')
+          .where({ id })
+
+          if (!recoveredData.length)
+            throw new Error('Id not found');
+      
+        return recoveredData[0];
+    } catch (error) {
+        console.log(`Error in findTaskById(): ${ error }`)
+        throw error;
     }
-    throw new Error('Id not found');
   }
 
   private readTasksFromFile(): Task[] {
