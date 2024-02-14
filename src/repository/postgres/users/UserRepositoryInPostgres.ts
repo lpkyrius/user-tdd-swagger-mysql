@@ -61,9 +61,20 @@ class UserRepositoryInPostgres implements IUserRepository {
   }
 
   async exists(id: string): Promise<boolean> {
-      const users = this.readUsersFromFile();
-      
-      return users.some((user) => user.id === id);
+    try {
+      const recoveredData = await db('users')
+          .select('*')
+          .from('users')
+          .where({ id })
+
+      if (!recoveredData.length)
+        return false;
+
+      return true;
+    } catch (error) {
+        console.log(`Error in exists(): ${ error }`)
+        throw error;
+    }
   }
 
   async emailExists(email: string): Promise<boolean> {
