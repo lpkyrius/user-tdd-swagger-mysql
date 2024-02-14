@@ -15,7 +15,7 @@ describe('#taskService', () => {
   // to enable/disable one specific test (in memory or postgres) 
   // just comment the correspondent line withing the repositories object below
   const repositories: Record<string, string> = { 
-    // inmemory: 'InMemory', 
+    inmemory: 'InMemory', 
     database: 'Postgres' 
   };
 
@@ -71,29 +71,25 @@ describe('#taskService', () => {
     describe('#List Tasks', () => {
       let tasks: Task[];
 
-      const taskStructureInMemory = expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(String),
-          user_id: expect.any(String),
-          summary: expect.any(String),
-          created_at: expect.any(String),
-        }),
+      let taskRawStructure = {
+        id: expect.any(String),
+        user_id: expect.any(String),
+        summary: expect.any(String),
+        created_at: expect.any(Date)
+      };
+      
+      if (repositories[property] == 'InMemory')
+        taskRawStructure.created_at = expect.any(String)
+
+      const taskStructure = expect.arrayContaining([
+        expect.objectContaining(taskRawStructure),
       ]);
 
-      const taskStructureInPostgres = expect.arrayContaining([
-        expect.objectContaining({
-          id: expect.any(String),
-          user_id: expect.any(String),
-          summary: expect.any(String),
-          created_at: expect.any(Date),
-        }),
-      ]);
-      if (repositories[property] == 'InMemory')
       it('should receive an array of tasks', async () => {
         tasks = await taskService.list();
-        console.log('debug', tasks)
+        
         expect(tasks).toBeInstanceOf(Array);
-        expect(tasks).toEqual(repositories[property] == 'InMemory' ? taskStructureInMemory : taskStructureInPostgres);
+        expect(tasks).toEqual(taskStructure);
       });
     });
 
