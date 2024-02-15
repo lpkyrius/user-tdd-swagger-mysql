@@ -71,7 +71,7 @@ describe('#UserService', () =>{
             })
         })
 
-        describe.skip('#CreateUser', () => {
+        describe('#CreateUser', () => {
             it('should be able to create a new user and confirm it exists', async () => {
                 const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const user: User = {

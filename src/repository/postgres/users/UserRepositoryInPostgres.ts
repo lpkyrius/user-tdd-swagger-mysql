@@ -17,15 +17,24 @@ class UserRepositoryInPostgres implements IUserRepository {
       this.filePath = manageUserTestFile.getFile();
   }
   async add(user: User): Promise<User> {
-      // const users = this.readUsersFromFile();
-      // const newUser = { ...user, id: crypto.randomUUID(), created_at: new Date(new Date().toISOString()) };
-      // users.push(newUser);
-      // this.writeUsersToFile(users);
-
-      // return newUser;
-
-
-      return user;
+    try {
+      const newUser: User = { ...user, id: crypto.randomUUID(), created_at: new Date(new Date().toISOString()) };
+      const savedUser = await db('users')
+          .insert({
+            id: newUser.id,
+            email: newUser.email,
+            password: newUser.password,
+            role: newUser.role,
+            created_at: newUser.created_at 
+          })
+          .returning('*');
+          
+      return savedUser[0];  
+            
+    } catch (error) {
+        console.log(`Error in addUser(): ${error}`);
+        throw error;
+    }
   }
 
   async findUserByEmail(email: string): Promise<User> {
