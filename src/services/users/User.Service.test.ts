@@ -50,7 +50,7 @@ describe('#UserService', () =>{
             })
         })
 
-        describe.skip('#UserEmailExist', () => {
+        describe('#UserEmailExist', () => {
             it('should return true when check if an existent user email exists', async () => {
                 const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const user: User = {
