@@ -38,13 +38,20 @@ class UserRepositoryInPostgres implements IUserRepository {
   }
 
   async findUserByEmail(email: string): Promise<User> {
-      const users = this.readUsersFromFile();
-      const index = users.findIndex((e) => e.email === email);
-      if (index !== -1) {
-          return users[index];
-      }
-      
-      throw new Error('email not found');
+    try {
+      const recoveredData = await db('users')
+          .select('*')
+          .from('users')
+          .where({ email })
+
+      if (recoveredData.length)
+        return recoveredData;
+
+      throw new Error('Email not found');
+    } catch (error) {
+        console.log(`Error in findUserByEmail(): ${ error }`)
+        throw error;
+    }
   }
 
   async update(user: User): Promise<User> {

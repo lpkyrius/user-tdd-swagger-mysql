@@ -89,7 +89,7 @@ describe('#UserService', () =>{
             })
         })
 
-        describe.skip('#LoginUser', () => {
+        describe('#LoginUser', () => {
             it('should be able to log in with valid user and password', async () => {
                 const userData = {
                     email: 'mary.tech@email.com',

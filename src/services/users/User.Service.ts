@@ -30,9 +30,12 @@ class UserService {
     }
 
     async login({ email, password }: ILoginUserRequest) {
+        let loginSuccess: boolean = false;
         const user: User = await this.userRepository.findUserByEmail(email)
-        const crypto = new Cryptography();
-        const loginSuccess: boolean = await crypto.decrypt(password, user.password);
+        if (user){
+            const crypto = new Cryptography();
+            loginSuccess = await crypto.decrypt(password, user.password);
+        }
 
         return loginSuccess;
     }
