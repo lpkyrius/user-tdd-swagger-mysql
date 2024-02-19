@@ -45,9 +45,9 @@ class UserRepositoryInPostgres implements IUserRepository {
           .where({ email })
 
       if (recoveredData.length)
-        return recoveredData;
+        return recoveredData[0];
 
-      throw new Error('Email not found');
+      throw new Error('email not found');
     } catch (error) {
         console.log(`Error in findUserByEmail(): ${ error }`)
         throw error;

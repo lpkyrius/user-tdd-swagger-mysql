@@ -31,7 +31,7 @@ class UserService {
 
     async login({ email, password }: ILoginUserRequest) {
         let loginSuccess: boolean = false;
-        const user: User = await this.userRepository.findUserByEmail(email)
+        const user = await this.userRepository.findUserByEmail(email)
         if (user){
             const crypto = new Cryptography();
             loginSuccess = await crypto.decrypt(password, user.password);
