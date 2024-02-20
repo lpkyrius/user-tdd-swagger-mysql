@@ -26,13 +26,13 @@
 
 > ⭐️ Save the UUID keys in database as binary type
 
-- [ ] Persist data with MySQL
+- [x] Persist data with MySQL
     - Knex migrations;
     - Factory following the new persist repository;
     - Create the persistent repository only with the methods signature;
     - TDD is already done since I made it for in-memory repository;
-- [ ] Integrate with JWT to manage tasks only if logged in
 
 ##### Next phase
 
+- [ ] Integrate with JWT to manage tasks only if logged in
 - [ ] Integrate Users authentication (JWT) for Tasks management;
