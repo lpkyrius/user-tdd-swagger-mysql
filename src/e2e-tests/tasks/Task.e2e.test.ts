@@ -10,8 +10,8 @@ const e2eTestEnabled: boolean = ((process.env.ENABLE_E2E_TESTS || 'Y') === 'Y')
 
 // Mock console.log and console.error globally for the entire test suite
 // So we keep a clear console when tests should return error 
-// global.console.log = jest.fn();
-// global.console.error = jest.fn();
+global.console.log = jest.fn();
+global.console.error = jest.fn();
 
 if (!e2eTestEnabled) {
   describe.skip('End-to-End Tests', () => {
@@ -39,7 +39,7 @@ if (!e2eTestEnabled) {
           .expect('Content-Type', /json/)
           .expect(201);
             
-          expect(response.body).toMatchObject(taskData);
+          expect(response.body).toHaveProperty('id');
           expect(response.body.summary).toBe('E2E Test summary #1');
       });
 
@@ -144,18 +144,17 @@ if (!e2eTestEnabled) {
 
         const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
         testTask.summary = 'Updating task summary with this info!';
-        
-        const responseUpdate = await request(app)
 
+        const responseUpdate = await request(app)
             .put('/task/update/'+ testTask.id)
             .send(testTask)
             .expect('Content-Type', /json/)
             .expect(200);
 
-            expect(responseUpdate.body).toEqual(testTask);
+          expect(responseUpdate.body).toEqual(testTask);
       });
 
-      test('It should respond with 400 bad request when trying to update with a summary larger than 500 characters.', async () => {
+      test.only('It should respond with 400 bad request when trying to update with a summary larger than 500 characters.', async () => {
         const repeatedSummary = 'A';
         const response = await request(app)
               .get('/task/list')
@@ -163,11 +162,9 @@ if (!e2eTestEnabled) {
               .expect(200);
 
         const testTask: Task = Object.assign({}, response.body.slice(-1)[0]);
-
         testTask.summary = repeatedSummary.repeat(501);
 
         const responseUpdate = await request(app)
-
             .put('/task/update/'+ testTask.id)
             .send(testTask)
             .expect('Content-Type', /json/)

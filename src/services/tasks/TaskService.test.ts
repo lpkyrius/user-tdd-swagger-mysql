@@ -73,7 +73,7 @@ describe('#taskService', () => {
 
       let taskRawStructure = {
         id: expect.any(String),
-        user_id: expect.any(String),
+        userId: expect.any(String),
         summary: expect.any(String),
         created_at: expect.any(Date)
       };

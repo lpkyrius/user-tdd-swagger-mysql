@@ -32,7 +32,7 @@ class UserRepositoryInPostgres implements IUserRepository {
       return savedUser[0];  
             
     } catch (error) {
-        console.log(`Error in addUser(): ${error}`);
+        console.log(`Error in add User(): ${error}`);
         throw error;
     }
   }
@@ -70,20 +70,27 @@ class UserRepositoryInPostgres implements IUserRepository {
 
       return updatedUser[0];
   } catch (error) {
-      console.log(`Error in updateUser(): ${ error }`);
+      console.log(`Error in update user(): ${ error }`);
       throw error;
   }
   }
 
   async delete(id: string): Promise<boolean> {
-      const users = this.readUsersFromFile();
-      const initialLength = users.length;
-      const filteredUsers = users.filter((u) => u.id !== id);
-      if (filteredUsers.length !== initialLength) {
-          this.writeUsersToFile(filteredUsers);
-          return true;
-      }
-      return false;
+    try {
+
+      const deletedTokenData = await db('users')
+          .where({ id })
+          .del()
+          .returning("id");
+
+      if (!deletedTokenData.length)
+        return false;
+      
+      return true;
+    } catch (error) {
+        console.log(`Error in delete user(): ${ error }`);
+        throw error;
+    }
   }
 
   async exists(id: string): Promise<boolean> {
@@ -98,7 +105,7 @@ class UserRepositoryInPostgres implements IUserRepository {
 
       return true;
     } catch (error) {
-        console.log(`Error in exists(): ${ error }`)
+        console.log(`Error in exists user(): ${ error }`)
         throw error;
     }
   }
@@ -115,13 +122,9 @@ class UserRepositoryInPostgres implements IUserRepository {
 
       return true;
     } catch (error) {
-        console.log(`Error in exists(): ${ error }`)
+        console.log(`Error in emailExists user(): ${ error }`)
         throw error;
     }
-  }
-
-  async list(): Promise<User[]> {
-      return this.readUsersFromFile();
   }
 
   async findUserById(id: string): Promise<User> {
@@ -139,15 +142,6 @@ class UserRepositoryInPostgres implements IUserRepository {
         console.log(`Error in findUserById(): ${ error }`)
         throw error;
     }
-  }
-
-  private readUsersFromFile(): User[] {
-      const fileData = fs.readFileSync(this.filePath, 'utf-8');
-      return JSON.parse(fileData);
-  }
-
-  private writeUsersToFile(users: User[]): void {
-      // fs.writeFileSync(this.filePath, JSON.stringify(users, null, 2));
   }
 
 }

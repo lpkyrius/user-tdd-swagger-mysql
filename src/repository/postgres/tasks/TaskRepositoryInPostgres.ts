@@ -83,8 +83,9 @@ class TaskRepositoryInPostgres implements ITaskRepository {
   async list(): Promise<Task[]> {
     try {
       const recoveredData = await db('maintenance_task')
-      .select('*').from('maintenance_task');
-      return recoveredData;
+      .select('id', 'user_id as userId', 'summary', 'created_at').from('maintenance_task');
+    
+    return recoveredData;
   } catch (error) {
       console.log(`Error in list(): ${ error }`)
       throw error;

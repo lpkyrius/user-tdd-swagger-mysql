@@ -7,15 +7,15 @@ import { UserRepositoryInPostgres } from '../../repository/postgres/users/UserRe
 
 // Mock console.log and console.error globally for the entire test suite
 // So we keep a clear console when tests should return error 
-// global.console.log = jest.fn();
-// global.console.error = jest.fn();
+global.console.log = jest.fn();
+global.console.error = jest.fn();
 
 describe('#UserService', () =>{
 
     // to enable/disable one specific test (in memory or postgres) 
     // just comment the correspondent line withing the repositories object below
     const repositories: Record<string, string> = { 
-        // inmemory: 'InMemory', 
+        inmemory: 'InMemory', 
         database: 'Postgres' 
     };
 
@@ -189,7 +189,7 @@ describe('#UserService', () =>{
             });
         })
 
-        describe.skip('#DeleteUser', () => {
+        describe('#DeleteUser', () => {
             it('should be able to delete an existent user', async () => {
                 const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 const userData = {

@@ -1,7 +1,6 @@
 import { expect, describe, test, beforeAll } from '@jest/globals';
 import request from 'supertest';
 import app from '../../app';
-import { mockedUsers } from './mockedUsers';
 import { User } from '../../entities/User';
 import { ManageUserTestFile } from '../../repository/in-memory/users/ManageUserTestFile';
 
@@ -10,8 +9,8 @@ const e2eTestEnabled: boolean = ((process.env.ENABLE_E2E_TESTS || 'Y') === 'Y')
 
 // Mock console.log and console.error globally for the entire test suite
 // So we keep a clear console when tests should return error 
-// global.console.log = jest.fn();
-// global.console.error = jest.fn();
+global.console.log = jest.fn();
+global.console.error = jest.fn();
 
 if (!e2eTestEnabled) {
     describe.skip('End-to-End Tests', () => {
