@@ -156,7 +156,7 @@ describe('#UserService', () =>{
             });
         });
 
-        describe.skip('#UpdateUser', () => {
+        describe('#UpdateUser', () => {
             it('should be able to update an existent user', async () => {
                 const randomString = (Math.floor((Math.random() * 1000000) + 1)).toString();
                 let user: User, result: User; 

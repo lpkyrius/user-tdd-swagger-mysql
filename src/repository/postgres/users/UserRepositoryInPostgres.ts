@@ -55,14 +55,24 @@ class UserRepositoryInPostgres implements IUserRepository {
   }
 
   async update(user: User): Promise<User> {
-      const users = this.readUsersFromFile();
-      const index = users.findIndex((u) => u.id === user.id);
-      if (index !== -1) {
-          users[index] = user;
-      this.writeUsersToFile(users);
-      return user;
-      }
-      throw new Error('user not found');
+    try {
+      const { email, role } = user
+      const updatedUser = await db('users')
+        .where('id', '=', user.id)
+        .update({
+            email,
+            role
+          })
+        .returning('*');
+      
+      if (!updatedUser.length)
+        throw new Error('user not found');
+
+      return updatedUser[0];
+  } catch (error) {
+      console.log(`Error in updateUser(): ${ error }`);
+      throw error;
+  }
   }
 
   async delete(id: string): Promise<boolean> {
