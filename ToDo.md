@@ -27,10 +27,10 @@
 > ⭐️ Save the UUID keys in database as binary type
 
 - [x] Persist data with MySQL
-    - Knex migrations;
-    - Factory following the new persist repository;
-    - Create the persistent repository only with the methods signature;
-    - TDD is already done since I made it for in-memory repository;
+    - [x] Knex migrations;
+    - [x] Factory following the new persist repository;
+    - [x] Create the persistent repository only with the methods signature;
+    - [x] TDD is already done since I made it for in-memory repository;
 
 ##### Next phase
 
