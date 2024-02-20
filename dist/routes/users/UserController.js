@@ -53,7 +53,7 @@ class UserController {
             return res.status(200).json(await this.userService.findById(id));
         }
         catch (error) {
-            if (error.message.includes('Id not found'))
+            if (error.message.includes('id not found'))
                 return res.status(404).json({ error: 'user not found' });
             console.error(`httpFindTaskById Error-> ${error}`);
             res.status(500).json({ error: 'error attempting to find the user' });
@@ -77,7 +77,7 @@ class UserController {
             return res.status(200).json(updatedUser);
         }
         catch (error) {
-            if (error.message.includes('Id not found'))
+            if (error.message.includes('id not found'))
                 return res.status(404).json({ error: 'user not found' });
             console.error(`httpUpdateTask Error-> ${error}`);
             res.status(500).json({ error: 'error attempting to update an user' });

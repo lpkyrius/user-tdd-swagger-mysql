@@ -106,7 +106,7 @@ const UserRepositoryInMemory_1 = require("../../repository/in-memory/users/UserR
         it('should throw an error when trying to find a non-existing user on UserService', async () => {
             await (0, globals_1.expect)(async () => {
                 const findUserError = await userService.findById('this.id.should.not.exist');
-            }).rejects.toThrow('Id not found');
+            }).rejects.toThrow('id not found');
         });
     });
     (0, globals_1.describe)('#UpdateUser', () => {

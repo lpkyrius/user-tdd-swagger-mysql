@@ -76,7 +76,7 @@ class UserRepositoryInMemory implements IUserRepository {
         if (index !== -1) {
             return users[index];
         }
-        throw new Error('Id not found');
+        throw new Error('id not found');
     }
 
     private readUsersFromFile(): User[] {

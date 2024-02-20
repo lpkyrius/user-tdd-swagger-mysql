@@ -35,7 +35,7 @@ describe('#taskService', () => {
               try {
                 await tasksRepository.findTaskById('this.id.should.not.exist');
               } catch (error: any) {
-                expect(error.message).toBe('Id not found');
+                expect(error.message).toBe('id not found');
               }
             });
         });

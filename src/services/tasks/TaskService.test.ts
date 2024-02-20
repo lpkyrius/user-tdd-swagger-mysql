@@ -111,7 +111,7 @@ describe('#taskService', () => {
       it('should throw an error when trying to find a non-existing task on TaskService', async () => {
         await expect(async () => {
           const findTaskError: Task = await taskService.findById('this.id.should.not.exist');
-        }).rejects.toThrow('Id not found');
+        }).rejects.toThrow('id not found');
       });
     });
 

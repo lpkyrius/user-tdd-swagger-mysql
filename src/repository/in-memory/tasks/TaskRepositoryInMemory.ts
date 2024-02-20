@@ -64,7 +64,7 @@ class TasksRepositoryInMemory implements ITaskRepository {
     if (index !== -1) {
       return tasks[index];
     }
-    throw new Error('Id not found');
+    throw new Error('id not found');
   }
 
   private readTasksFromFile(): Task[] {

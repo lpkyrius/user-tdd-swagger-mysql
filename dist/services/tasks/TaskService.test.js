@@ -66,7 +66,7 @@ const TaskRepositoryInMemory_1 = require("../../repository/in-memory/tasks/TaskR
         it('should throw an error when trying to find a non-existing task on TaskService', async () => {
             await (0, globals_1.expect)(async () => {
                 const findTaskError = await taskService.findById('this.id.should.not.exist');
-            }).rejects.toThrow('Id not found');
+            }).rejects.toThrow('id not found');
         });
     });
     (0, globals_1.describe)('#Update Tasks', () => {

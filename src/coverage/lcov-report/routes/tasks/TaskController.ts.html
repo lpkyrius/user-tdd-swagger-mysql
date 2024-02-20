@@ -361,7 +361,7 @@ class TaskController {
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span>
 <span class="cstat-no" title="statement not covered" >      return res.status(200).json(await this.taskService.findById(id));</span>
     } catch (error: any) {
-      if (error.message.includes('Id not found')) 
+      if (error.message.includes('id not found')) 
         return res.status(404).json({ error: 'task not found' });
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >      console.error(`httpFindTaskById Error-&gt; ${error}`);</span></span>
 <span class="cstat-no" title="statement not covered" >      res.status(500).json({error: 'error attempting to find the task'});</span>

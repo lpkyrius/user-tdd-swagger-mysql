@@ -87,7 +87,7 @@ class UserRepositoryInMemory {
         if (index !== -1) {
             return users[index];
         }
-        throw new Error('Id not found');
+        throw new Error('id not found');
     }
     readUsersFromFile() {
         const fileData = fs.readFileSync(this.filePath, 'utf-8');

@@ -115,12 +115,20 @@ class UserRepositoryInPostgres implements IUserRepository {
   }
 
   async findUserById(id: string): Promise<User> {
-      const users = this.readUsersFromFile();
-      const index = users.findIndex((u) => u.id === id);
-      if (index !== -1) {
-          return users[index];
-      }
-      throw new Error('Id not found');
+    try {
+      const recoveredData = await db('users')
+          .select('*')
+          .from('users')
+          .where({ id })
+
+          if (!recoveredData.length)
+            throw new Error('id not found');
+      
+        return recoveredData[0];
+    } catch (error) {
+        console.log(`Error in findUserById(): ${ error }`)
+        throw error;
+    }
   }
 
   private readUsersFromFile(): User[] {

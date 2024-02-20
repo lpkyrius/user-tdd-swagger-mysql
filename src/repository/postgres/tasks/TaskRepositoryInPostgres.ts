@@ -99,7 +99,7 @@ class TaskRepositoryInPostgres implements ITaskRepository {
           .where({ id })
 
           if (!recoveredData.length)
-            throw new Error('Id not found');
+            throw new Error('id not found');
       
         return recoveredData[0];
     } catch (error) {

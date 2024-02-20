@@ -13,7 +13,7 @@ const TaskRepositoryInMemory_1 = require("./TaskRepositoryInMemory");
                 await tasksRepository.findTaskById('this.id.should.not.exist');
             }
             catch (error) {
-                (0, globals_1.expect)(error.message).toBe('Id not found');
+                (0, globals_1.expect)(error.message).toBe('id not found');
             }
         });
     });

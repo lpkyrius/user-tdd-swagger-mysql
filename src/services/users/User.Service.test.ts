@@ -131,7 +131,7 @@ describe('#UserService', () =>{
             })
         })
 
-        describe.skip('#Find User', () => {
+        describe('#Find User', () => {
             let user: User;
         
             it('should find an existent user', async () => {
@@ -152,7 +152,7 @@ describe('#UserService', () =>{
             it('should throw an error when trying to find a non-existing user on UserService', async () => {
             await expect(async () => {
                 const findUserError: User = await userService.findById('this.id.should.not.exist');
-            }).rejects.toThrow('Id not found');
+            }).rejects.toThrow('id not found');
             });
         });
 

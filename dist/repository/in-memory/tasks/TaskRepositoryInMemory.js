@@ -75,7 +75,7 @@ class TasksRepositoryInMemory {
         if (index !== -1) {
             return tasks[index];
         }
-        throw new Error('Id not found');
+        throw new Error('id not found');
     }
     readTasksFromFile() {
         const fileData = fs.readFileSync(this.filePath, 'utf-8');
